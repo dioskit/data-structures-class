@@ -60,7 +60,8 @@ void menu_function(void){
 bool exit_func(){     
     char yes_no;     
     printf("exit?....(y/n):");     
-    scanf(" %c",&yes_no);     
+    scanf(" %c",&yes_no);
+    //to lower function  use     
     switch(yes_no){         
         case 'y':             
             return true;             
@@ -68,6 +69,7 @@ bool exit_func(){
         case 'n':             
             return false;    
             break;
+        //add case for others 
     }
 }
 void insert_1st(int *arr, int length){
