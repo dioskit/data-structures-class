@@ -1,99 +1,60 @@
-#include<stdio.h>
-
-
+#include <stdio.h>
 
 void swap(int *a, int *b);
-void bubble_sort(int a[], int length);
-void select_sort(int *a, int length);
-void print_arry(int *a, int length);
-int binary_search(int *a, int start, int end, int ele);
+void sort(int *arry, int length);
+int search(int *arry, int start, int end, int search_element);
+void print(int *arry, int length);
 
 int main(){
+    //we will take a predefined arry
+    int arr[15] = {9,8,6,5,1,3,4,8,-4,6,7,5,3,-5,-9};
+    int length = sizeof(arr)/sizeof(arr[0]);
     
-   /* printf("enter length of arry: ");
-    int length;
-    scanf("%d",&length);
+    sort(arr,length);
+    print(arr,length);
     
-    int arr[length];
-
-    for(int i = 0; i < length; i++){
-        printf("enter element: ");
-        scanf("%d",&arr[i]);
-    }*/
-    int length = 10;
-    int arr[10] = {9,8,7,6,5,43,2,1,0,-1};
-    
-    printf("arry before sorting\n");
-    print_arry(arr, length);
-    //bubble_sort(arr, length);
-    select_sort(arr, length);
-    printf("\narry after sorting \n");
-    print_arry(arr, length);
-    
-    printf("enter element to search for: ");
-    int search_ele;
-    scanf("%d",&search_ele);
-    
-    int found = binary_search(arr,0,length-1,search_ele);
-    
-    if(found == -1){
-        printf("not found");
-    }
-    else if(arr[found] == search_ele){
-        printf("element is found at postion %d",found + 1);
-    }   
-    else{
-        printf("not found");
-    }
-        
-    
-
-    return 0;
+    printf("Enter element to search: ");
+    int ele;
+    scanf("%d",&ele);
+    int index = search(arr,0,length,ele);
+    if(index == -1)
+        printf("%d does not exit in the arry\n",ele);
+    else
+        printf("%d is found at position %d\n",ele,index+1);
 }
-
-//to swap pass the address when calling the function like swap(&a, &b);
 void swap(int *a, int *b){
-    int temp;
-    temp = *a;
+    int temp = *a;
     *a = *b;
     *b = temp;
 }
-
-//this is bubble sorting
-void bubble_sort(int a[], int length){
-    for(int i = 0; i < length -1; i++){
-        for(int j = 0; j < length - i -1 ; j++){
-            if(a[j] > a[j+1]){
-                swap(&a[j+1], &a[j]);
-            }
-        }
-    }
-}
-//this is section sorting 
-void select_sort(int *a, int length){
-    for(int i = 0; i < length ; i++)
-        for(int j = i + 1; j < length ; j++)
-            if(a[i] > a[j])
-                swap(&a[i],&a[j]);
-    
-}
-void print_arry(int *a, int length){
+void sort(int *arry, int length){
     for(int i = 0; i < length; i++)
-        printf("%d ", a[i]);
-    printf("\n");
+        for(int j = i + 1; j < length; j++)
+            if(arry[i] > arry[j])
+                swap(&arry[i],&arry[j]);
 }
-//binary search program
-int binary_search(int *a, int start, int end, int ele){
+int search(int *arr, int start, int end, int search_element){
     if(start > end)
         return -1;
-    else if(a[(start + end) / 2] == ele)
-        return (start + end) / 2;
-    else if(a[(start + end) / 2] > ele){
-        end = (((start + end) / 2) - 1);
-        binary_search(a,start,end,ele);
+    else if(arr[(start + end)/2] == search_element){
+        return (start + end)/2;
     }
-    else if(a[(start + end) / 2] < ele){
-        start = ((start + end) / 2) + 1;
-        binary_search(a,start,end,ele);
+    else if(arr[(start + end)/2] > search_element){
+        //mid + 1 is end
+        end = (start + end)/2 - 1;
+        search(arr,start,end,search_element);
     }
+    
+    else if(arr[(start + end)/2] < search_element){
+        //mid + 1 is satrt
+        start = (start + end)/2 + 1;
+        search(arr,start,end,search_element);
+    }
+}
+    
+void print(int *arry, int length){
+    for(int i = 0; i < length; i++)
+        printf("%d ", arry[i]);
+        
+    printf("\n");
 }
