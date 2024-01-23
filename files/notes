@@ -1,0 +1,9 @@
+there are three different types of time complexity
+  best case  
+  average case
+  worst case
+
+suppose in linear search
+best is element to search is on the first position so unit time is Omega(1)
+the average case is O(n)/2 = (1/2)*O(n)
+in worst case the time complexity is O(n)
