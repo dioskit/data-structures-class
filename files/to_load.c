@@ -1,34 +1,99 @@
-int linear_search(int a[], int n,int ele){
-    for(int i = 0; i < n; i++)
-        if(a[i] == val)
-            return i+1;
+#include<stdio.h>
 
-    return -1;
+
+
+void swap(int *a, int *b);
+void bubble_sort(int a[], int length);
+void select_sort(int *a, int length);
+void print_arry(int *a, int length);
+int binary_search(int *a, int start, int end, int ele);
+
+int main(){
+    
+   /* printf("enter length of arry: ");
+    int length;
+    scanf("%d",&length);
+    
+    int arr[length];
+
+    for(int i = 0; i < length; i++){
+        printf("enter element: ");
+        scanf("%d",&arr[i]);
+    }*/
+    int length = 10;
+    int arr[10] = {9,8,7,6,5,43,2,1,0,-1};
+    
+    printf("arry before sorting\n");
+    print_arry(arr, length);
+    //bubble_sort(arr, length);
+    select_sort(arr, length);
+    printf("\narry after sorting \n");
+    print_arry(arr, length);
+    
+    printf("enter element to search for: ");
+    int search_ele;
+    scanf("%d",&search_ele);
+    
+    int found = binary_search(arr,0,length-1,search_ele);
+    
+    if(found == -1){
+        printf("not found");
+    }
+    else if(arr[found] == search_ele){
+        printf("element is found at postion %d",found + 1);
+    }   
+    else{
+        printf("not found");
+    }
+        
+    
+
+    return 0;
 }
-swap(int a, int b){
+
+//to swap pass the address when calling the function like swap(&a, &b);
+void swap(int *a, int *b){
     int temp;
-    temp = a;
-    a = b;
-    b = temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
-void selection(int *arr, int len){
-    for(int i = 0; i < len; i++){
-        for(int j = i +1; j < len; j++){
-            if(arr[i] > arr[j]){
-                swap(arr[i],arr[j]);
+//this is bubble sorting
+void bubble_sort(int a[], int length){
+    for(int i = 0; i < length -1; i++){
+        for(int j = 0; j < length - i -1 ; j++){
+            if(a[j] > a[j+1]){
+                swap(&a[j+1], &a[j]);
             }
         }
     }
 }
-int main(){
-    int a[] = {1,2,3,4,5,6,8,9,5,1,26,65,5,5,4,65,22,4};
-    int len = sizeof(a)/sizeof(a[0]);
-    int ele = 22;
-    int found = linear_search(a,len,ele);
-    if(found == -1)
-    printf("not found")
-    else
-    printf("found at %d position",found);
-
+//this is section sorting 
+void select_sort(int *a, int length){
+    for(int i = 0; i < length ; i++)
+        for(int j = i + 1; j < length ; j++)
+            if(a[i] > a[j])
+                swap(&a[i],&a[j]);
+    
+}
+void print_arry(int *a, int length){
+    for(int i = 0; i < length; i++)
+        printf("%d ", a[i]);
+    printf("\n");
+}
+//binary search program
+int binary_search(int *a, int start, int end, int ele){
+    if(start > end)
+        return -1;
+    else if(a[(start + end) / 2] == ele)
+        return (start + end) / 2;
+    else if(a[(start + end) / 2] > ele){
+        end = (((start + end) / 2) - 1);
+        binary_search(a,start,end,ele);
+    }
+    else if(a[(start + end) / 2] < ele){
+        start = ((start + end) / 2) + 1;
+        binary_search(a,start,end,ele);
+    }
 }
