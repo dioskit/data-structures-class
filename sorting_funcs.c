@@ -1,10 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+            Bubble    Iinsertion   Selection        Quick      Merge
+    best    n           n              n^2            nlogn      nlogn
+    avg     n^2         n^2            n^2            nlogn      nlogn
+    worst   n^2         n^2            n^2            n^2        nlogn
+
+*/
 
 void swap(int *a, int *b);
 void bubble_sort(int *arr, int length);
 void inserton_sort(int *arr, int length);
+void selectionSort(int *a, int length);
 int linear_search(int *arr, int length, int search_element);
 int binary_search(int *arr, int start, int end, int search_element);
 
@@ -14,7 +22,7 @@ int main(){
     int length = sizeof(arr)/sizeof(arr[0]);
     printf("Before sorting:\n");
     print(arr,length);
-    printf("choosi type of sorting:\n\t1 for bubble\n\t2 for insertion\n\tEnter: ");
+    printf("choosi type of sorting:\n\t1 for bubble\n\t2 for insertion\n\t3.selection\n\tEnter: ");
     int opt;
     scanf("%d",&opt);
     switch (opt){
@@ -25,6 +33,11 @@ int main(){
             break;
         case 2:
             inserton_sort(arr,length);
+            printf("after sorting: ");
+            print(arr,length);
+            break;
+        case 3:
+            selectionSort(arr,length);
             printf("after sorting: ");
             print(arr,length);
             break;
@@ -84,6 +97,19 @@ void inserton_sort(int *arr, int length){
         arr[j + 1] = key;
     }
 }
+
+void selectionSort(int *a, int length){
+    for(int i = 0; i < length - 1; i++){
+        int min_pos = i;
+        for(int j = i + 1; j < length; j++)
+            if(a[j] < a[min_pos]) min_pos = j;
+        if(min_pos != i){
+            int temp = a[i];
+            a[i] = a[min_pos];
+            a[min_pos] = temp;
+        }
+     }
+}
 int linear_search(int *arr, int length, int search_element){
     for(int i = 0; i < length; i++)
         if(arr[i] == search_element)
@@ -113,3 +139,7 @@ void print(int *arr, int length){
         printf("%d ",arr[i]);
     printf("\n");
 }
+
+
+
+
