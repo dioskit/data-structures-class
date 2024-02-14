@@ -1,137 +1,226 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
+/*********************************************
+ * 
+ * this program is to 
+ * insert at the begining, at some postion(1 as first positon) and at the end.
+ * deletion at the begining, at some postion(1 as first positon) and at the end.
+ * 
+ * to additon of reverse is not added yet
+ * 
+************************************************/
 
-struct Node{
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
+
+struct Node {
     int data;
     struct Node* next;
 };
 typedef struct Node Node;
+Node* head = NULL;
 
-Node *head = NULL;
-
-void appendEnd(int x);
-void printList();
-void appendBeg(int x);
-void appendNth(int x, int n);
+//insert functions
+void insert();
+void insertB(int x);
+void insertN(int x, int pos);
+void insertE(int x);
+//delete functions
+void Delete();
+void DeleteB();
+void DeleteN(int pos);
+void DeleteE();
+// function to print the linked list
+void print();
+// navagation menu and its options
 void menu();
-int main(){
-    /*int arr[10] = {8,6,5,3,2,1,4,7,0,9};
-    
-    for(int i = 0; i < 10; i++){
-        appendEnd(arr[i]);
+int option_insertion_or_deletion();
+
+int main() {
+    char yesNo;
+    printf("do you want test case list with elements already inserted?\nenter (y/n):");
+    scanf("%c",&yesNo);
+    if(yesNo == 'Y' || yesNo == 'y'){
+        for(int i = 5; i < 10; i++)
+            insertB(i*7/3);
+        printf("your list is: ");
+        print();
+        menu();
     }
-    printList();
+    else menu();
     
-    //checking working of appending at the beging
-    int arr2[5] = {12,15,19,16,-5};
-    for(int i = 0; i < 5; i++){
-        appendBeg(arr2[i]);
-    }
-    printList();
-    
-    appendNth(-14,7);
-    printList();*/
-    menu();
+    printf("<<<successfully exited>>>");
     return 0;
-    
 }
 
-void appendEnd(int x){
-    Node *newNode = (Node*)(malloc(sizeof(Node)));
-    newNode -> data = x;
-    newNode -> next = NULL;
-    if(head == NULL) head = newNode;
-    else{
-        Node *temp = head;
-        while(temp->next != NULL){
+void insert() {
+    bool invalid = false;
+    int insert_type;
+    int insert_element, insert_pos;
+    printf("enter element: ");
+    scanf(" %d", &insert_element);
+    printf("where do you want to insert:\n\t1. beginning\n\t2. at some position\n\t3. at the end\n\tENTER: ");
+    scanf(" %d", &insert_type);
+
+    switch (insert_type) {
+        case 1:
+            insertB(insert_element);
+            break;
+        case 2:
+            int position;
+            printf("enter the position: ");
+            scanf(" %d", &position);
+            insertN(insert_element, position);
+            break;
+        case 3:
+            insertE(insert_element);
+            break;
+        default:
+            invalid = true;
+            printf("error. invalid input\n");
+            break;
+    }
+    if (!invalid) {
+        printf("list after inserting: \n");
+        print();
+    }
+}
+
+void insertB(int x) {
+    Node* newNode = (Node*)(malloc(sizeof(Node)));
+    newNode->data = x;
+    newNode->next = head;
+    head = newNode;
+}
+
+void insertN(int x, int pos){
+    Node* newNode = (Node*)(malloc(sizeof(Node)));
+    newNode->data = x;
+    if (pos == 1) {
+        insertB(x);
+    } else {
+        Node* temp = head, *temp1 = head->next;
+        for (int i = 0; i < pos - 2; i++) {
             temp = temp->next;
+            temp1 = temp1->next;
         }
+        temp->next = newNode;
+        newNode->next = temp1;
+    }
+}
+
+void insertE(int x) {
+    Node* newNode = (Node*)(malloc(sizeof(Node)));
+    newNode->data = x;
+    newNode->next = NULL;
+    if (head == NULL) head = newNode;
+    else {
+        Node* temp = head;
+        while (temp->next != NULL) temp = temp->next;
         temp->next = newNode;
     }
 }
-void printList(){
-    Node *temp = head;
-    if(head == NULL) printf("empty list:");
-    while(temp != NULL){
-        printf("%d ",temp->data);
+
+void Delete() {
+    bool invalid = false;
+    int delete_position, delete_choice;
+    printf("where do you want to delete:\n\t1. beginning\n\t2. at some position\n\t3. at the end\n\tENTER: ");
+    scanf(" %d", &delete_choice);
+    switch (delete_choice) {
+        case 1:
+            DeleteB();
+            break;
+        case 2:
+            printf("enter the position:");
+            scanf(" %d", &delete_position);
+            DeleteN(delete_position);
+            break;
+        case 3:
+            DeleteE();
+            break;
+        default:
+            printf("Error invalid input");
+            invalid = true;
+            break;
+    }
+    if (!invalid) {
+        printf("after deletion list is:\n ");
+        print();
+    }
+}
+
+void DeleteB() {
+    if (head != NULL) {
+        Node* temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+void DeleteN(int pos) {
+    if (pos == 1) DeleteB();
+    else {
+        Node* temp = head, *temp1 = head->next;
+        for (int i = 0; i < pos - 2; i++) {
+            temp = temp->next;
+            temp1 = temp1->next;
+        }
+        if (temp1 != NULL) {
+            temp->next = temp1->next;
+            free(temp1);
+        }
+    }
+}
+
+void DeleteE() {
+    if (head != NULL) {
+        Node* temp = head, *temp1 = head->next;
+        while (temp->next != NULL && temp->next->next != NULL) {
+            temp = temp->next;
+            temp1 = temp1->next;
+        }
+        if (temp1 != NULL) {
+            temp->next = NULL;
+            free(temp1);
+        }
+    }
+}
+
+void print() {
+    printf("--->>> ");
+    Node* temp = head;
+    while (temp != NULL) {
+        printf("%d ", temp->data);
         temp = temp->next;
     }
     printf("\n");
 }
-void appendBeg(int x){
-    //at the begining
-    Node *newNode = (Node*)(malloc(sizeof(Node)));
-    newNode -> data = x;
-    newNode -> next = head;
-    head = newNode;
-}
-void appendNth(int x, int n){
-    Node *newNode = (Node*)(malloc(sizeof(Node)));
-    newNode -> data = x;
-    newNode -> next = NULL;
-    Node *temp = head;
-    if(n == 1){
-        newNode -> next = head;
-        head = newNode;
-    }
-    for(int i = 0; i < n-2; i++){
-        temp = temp -> next;
-    }
-    newNode -> next = temp -> next;
-    temp -> next = newNode;
-}
-void menu(){
-    printf("--------MENU--------\n");
-    printf("enter the option for element insertion:\n\t\t1 for insertion at the bigining\n\t\t2 for inserton a nth psotion\n\t\t3 for insertion end\n\t\t4for EXIT\n\t\tEnter options: ");
-    int option,element,postion;
-    scanf("%d", &option);
-    switch(option){
+
+void menu() {
+    switch (option_insertion_or_deletion()) {
         case 1:
-            int n;
-            printf("enter the number of elements to enter: ");
-            scanf("%d",&n);
-            for(int i = 0; i < n; i++){
-                printf("enter element: ");
-                scanf("%d",&element);
-                appendBeg(element);
-            }
-            printList();
+            insert();
             menu();
             break;
         case 2:
-            int in;
-            printf("enter the number of elements to enter: ");
-            scanf("%d",&in);
-            for(int i = 0; i < in; i++){
-                printf("enter element: ");
-                scanf("%d",&element);
-                printf("enter the postion: ");
-                scanf("%d",&postion);
-                appendNth(element,postion);
-            }
-            printList();
+            Delete();
             menu();
             break;
-        case 3:
-            int ni;
-            printf("enter the number of elements to enter: ");
-            scanf("%d",&ni);
-            for(int i = 0; i < ni; i++){
-                scanf("%d",&element);
-                appendEnd(element);
-            }
-            printList();
-            menu();
-            break;
-        case 4:
-            printList();
-            printf("this is the list\nEXITING");
+        case -1:
+            printf("exiting menu\n");
             break;
         default:
-            printf("invalid input.\n");
+            printf("Error.. invalid input\n");
             menu();
             break;
     }
+    
+}
 
+int option_insertion_or_deletion() {
+    int choice;
+    printf("\n---ENTER---\n\t1. for insertion\n\t2. for deletion\n\t-1. to exit\n\tenter: ");
+    scanf(" %d", &choice);
+    if (choice == -1) return -1;
+    else return choice;
 }
