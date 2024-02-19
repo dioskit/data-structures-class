@@ -30,6 +30,8 @@ void Delete();
 void DeleteB();
 void DeleteN(int pos);
 void DeleteE();
+//function to reverse the linked list
+void reverse();
 // function to print the linked list
 void print();
 // navagation menu and its options
@@ -41,8 +43,9 @@ int main() {
     printf("do you want test case list with elements already inserted?\nenter (y/n):");
     scanf("%c",&yesNo);
     if(yesNo == 'Y' || yesNo == 'y'){
-        for(int i = 5; i < 10; i++)
+        for(int i = 0; i < 10; i++)
             insertB(i*7/3);
+            
         printf("your list is: ");
         print();
         menu();
@@ -186,6 +189,22 @@ void DeleteE() {
     }
 }
 
+void reverse(){
+    if(head == NULL) return;
+    else{
+        Node* current = head;
+        Node* prev = NULL, * after = head -> next;
+        while(current -> next != NULL){
+            current -> next = prev;
+            prev = current;
+            current = after;
+            after = after -> next;
+        }
+        current -> next = prev;
+        head = current;
+    }
+}
+
 void print() {
     printf("--->>> ");
     Node* temp = head;
@@ -206,6 +225,12 @@ void menu() {
             Delete();
             menu();
             break;
+        case 3:
+            reverse();
+            printf("your list after reversal: ");
+            print();
+            menu();
+            break;
         case -1:
             printf("exiting menu\n");
             break;
@@ -219,8 +244,7 @@ void menu() {
 
 int option_insertion_or_deletion() {
     int choice;
-    printf("\n---ENTER---\n\t1. for insertion\n\t2. for deletion\n\t-1. to exit\n\tenter: ");
+    printf("\n---ENTER---\n\t1. for insertion\n\t2. for deletion\n\t3. for reverse\n\t-1. to exit\n\tenter: ");
     scanf(" %d", &choice);
-    if (choice == -1) return -1;
-    else return choice;
+    return choice;
 }
