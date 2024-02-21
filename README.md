@@ -14,3 +14,10 @@ contains menu driven program for
 - deletion at begining
 - deletion at some user given position
 - deletion at end
+
+## sorting of linked list
+- bubble sort
+- selection 
+- insertion 
+- merge
+- quick
