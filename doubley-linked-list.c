@@ -37,6 +37,10 @@ void InsertAtStart(int x){
     new -> next = head;
     head = new;
 }
+void InsertAtNth(int x, int position){
+    Node * temp = getNewNode(x);
+    
+}
 void print(){
     Node *temp = head;
     while(temp != NULL){
