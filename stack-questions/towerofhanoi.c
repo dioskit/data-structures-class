@@ -76,10 +76,7 @@ int main(){
     scanf("%d",&fromPillar);
     printf("enter target pillar: ");
     scanf("%d",&toPillar);
-
     initial(noOfDisks,fromPillar);
-
     printPillar();
-
     return 0;
 }
