@@ -13,7 +13,7 @@ struct Node{
 typedef struct Node Node;
 // functions
 Node* getNode(int x);
-void push(int x, Node*head);
+void push(int x, Node**head);
 int pop(Node** head);
 
 // function to construct initial pillar
@@ -43,8 +43,8 @@ void push(int x, Node **head){
 int pop(Node** head){  
     if(*head == NULL) return;
     Node * temp = *head;
-    int x = *temp -> data;
-    **head = *temp -> next;
-    free(*temp);
+    int x = temp -> data;
+    x*head = temp -> next;
+    free(temp);
     return x;
 }
