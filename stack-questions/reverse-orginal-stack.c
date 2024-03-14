@@ -8,46 +8,11 @@ typedef struct Node {
 } Node;
 
 Node* getNode(int x);
-
 void push(Node** top, int x);
-
 int pop(Node** top);
-
-bool isempty(Node** top) {
-    return *top == NULL;
-}
-
-void print(Node** top) {
-    Node* temp = *top;
-    while (temp != NULL) {
-        printf(" %d ", temp->data);
-        temp = temp->next;
-    }
-    printf("\n");
-}
-
-void reverseStack(Node** top) {
-    Node* top1 = NULL;
-    Node* top2 = NULL;
-
-    while (!isempty(top))
-        push(&top1, pop(top));
-    printf("After first reversal:\n");
-    print(&top1);
-    
-    while (!isempty(&top1))
-        push(&top2, pop(&top1));
-    printf("After second reversal:\n");
-    print(&top2);
-
-    while (!isempty(&top2))
-        push(top, pop(&top2));
-    printf("After final reversal:\n");
-    print(top);
-
-    free(top1);
-    free(top2);
-}
+bool isempty(Node** top);
+void print(Node** top);
+void reverseStack(Node** top) ;
 
 int main() {
     Node* top = NULL;
