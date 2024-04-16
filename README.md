@@ -25,12 +25,24 @@ contains menu driven program for
 - implement two stacks on the same arry [use both ends]
 - reverse a orginal stack using two temp stack
 
+## queues 
+1. ### queue questions:
+    - q1
+## stacks
+1. ### stack questions:
+    - rosseta-questions doors100, 24sum game not complted
+    - balacedbracket
+    - loop in linkedlist
+    - circulr
 ## sorting of linked list
 - bubble sort
 - selection 
 - insertion 
 - merge
 - quick
+
+
+
 
 ### for ae syllabus not related to this file 
 re 
