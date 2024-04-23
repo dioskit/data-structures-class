@@ -1,14 +1,14 @@
-# introduction to trees
+introduction to trees
 - What need to be stored?
-- cost of operations
-- memory useage
-- ease of implementation
+-cost of operations
+-memory useage
+-ease of implementation
 
-- trees can be used for storage of hirearcial  data:
+--trees can be used for storage of hirearcial  data:
 eg organisational hirearcy of employes of a compaly
- - collection of nodes in a hirearcy
- - tree is a non linear data structure
- - top node is called root of the tree
+--collection of nodes in a hirearcy
+--tree is a non linear data structure
+--top node is called root of the tree
 
 nodes will have some data and link or referance to other data structure
 root, childern, parent sibling, leaf nodes
@@ -23,7 +23,7 @@ root, childern, parent sibling, leaf nodes
                    _|_           |
                   |   |          |
                   9   10         11              // 9,10,11,4,6,7,8 are called leaf nodes since they no other nodes linked to them
-## application
+application
 1. storing naturally hierarcial data eg:file system
 2. organize data for quick search, insertion, deletion eg: binary search trees
 3. Trie //dictionary
