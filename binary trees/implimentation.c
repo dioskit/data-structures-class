@@ -15,6 +15,7 @@ void preorderTraversal(Node*);
 void inorderTraversal(Node*);
 void postorderTraversal(Node*);
 Node* findSmallestElement(Node*);
+Node* findLargestElement(Node*);
 Node* deleteElement(Node*,int);
 Node* mirrorImage(Node*);
 int totalNodes(Node*);
@@ -52,9 +53,98 @@ int main(){
                 break;
             case 4:
                 printf("\n the elements of the tree are:\n");
-                ptr = findSmallestElement(tree);
+                ptr = postorderTraversal(tree);
                 break;
-
+            case 5:
+                ptr = findSmallestElement(tree) ;
+                printf("\n Smallest element is: %d",ptr -> data);
+                break;
+            case 6:
+                ptr = findLargestElement(tree);
+                printf("\n Largest element is : %d",ptr -> data) ;
+                break;
+            case 7:
+                printf("\n ENter the element to be deleted");
+                scanf("%d",&val);
+                tree = deleteElement(tree,val);
+                break;
+            case 8:
+                printf("\n total no. of nodes = %d",totalNodes(tree));
+                break;
+            case 9:
+                printf("\n total no of external Nodes = %d", totalExternal(tree));
+                break;
+            case 10:
+                printf("\n total no. of internal nodes = %d", totalInternal(tree));
+                break;
+            case 11:
+                printf("\n the height of the tree = %d", height(tree));
+                break;
+            case 12:
+                tree = mirrorImage(tree);
+                break;
+            case 13:
+                tree = deleteTree(tree);
+                break;
         }
+    }while(option != 14);
+    getch();
+    return 0;
+}
+void create_tree(Node* tree){
+    tree = NULL;
+}
+Node* insertElement(Node* tree, int val){
+    Node *ptr, *nodeptr, *parentptr;
+    ptr = (Node*)malloc(sizeof(Node));
+    ptr -> data = val;
+    ptr -> left = NULL;
+    ptr -> right = NULL:
+    if(tree == NULL){
+        tree = ptr;
+        tree -> left = NULL;
+        tree -> right = NULL;
+    }
+    else {
+        parentptr = NULL;
+        nodeptr = tree;
+        while(nodeptr!=NULL){
+            parentptr=nodeptr;
+            if(val < nodeptr ->data) nodeptr = nodeptr-> left;
+            else nodeptr=nodeptr->right;
+        }
+        if(val<parentptr->data) parentptr -> left = ptr;
+        else parentptr -> right = ptr;
+    }
+    return tree;
+}
+void preorderTraversal(Node* tree){
+    if(tree!=NULL){
+        preorderTraversal(tree->left);
+       preorderTraversal(tree->right);
+        printf("%d\t",tree->data);
     }
 }
+void inorderTraversal(Node* tree){
+    if(tree!-NULL){
+        inorderTraversal(tree->left);
+        printf("%d\t",tree->data);
+        inorderTraversal(tree->right);
+    }
+}
+void postorderTraversal(Node*tree){
+    if(tree!= NULL){
+        postorderTraversal(tree->left);
+        
+    }
+}
+Node* findSmallestElement(Node*);
+Node* findLargestElement(Node*);
+Node* deleteElement(Node*,int);
+Node* mirrorImage(Node*);
+int totalNodes(Node*);
+int totalExternal(Node*);
+int totalInternal(Node*);
+int height(Node*);
+Node* deleteTree(Node);
+
