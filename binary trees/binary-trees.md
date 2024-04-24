@@ -30,10 +30,17 @@ root, childern, parent sibling, leaf nodes
 4. network routing algorithm 
 so on 
 
-binary tree
+#### binary tree
 each node can have atmost 2 childern
-Complete binary tree:
-    all level s except possibly the last are cmop;ete;y  filled and all nodes are left as possible
+##### Complete binary tree:
+- all level s except possibly the last are cmopletely filled and all nodes are left as possible\
 depth: how deep is level of nodes its called the height of the tree
 
-Maximum number of nudes at level i = 2^i;
+Maximum number of nudes at level i = 2^i;\
+
+if all nodes of a tree is filled the it is called **_perfect binary tree_**\
+\
+Maximun number of nodes in a tree with height h,(length of the longest route from root to leafs) \
+**h = 2<sup>0</sup>+2<sup>61</sup>+. . .+2<sup>h</sup>**\
+**h = 2<sup>h+1</sup>-1**\
+**h = 2<sup>(_number of levels_)</sup>-1**
