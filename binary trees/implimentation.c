@@ -24,21 +24,21 @@ int totalNodes(Node*);
 int totalExternal(Node*);
 int totalInternal(Node*);
 int height(Node*);
-Node* deleteTree(Node);
+Node* deleteTree(Node*);
 
-int main(){
+int main(void){
     int option, val;
     Node* ptr;
     create_tree(tree);
-    clrscr();
+    // clrscr();
     do{
-        printf("\n*********MAIN MENU********\n\n1. Insert Element\n 2. preorder traversal");
+        printf("\n*********MAIN MENU********\n\n1. Insert Element\n2. preorder traversal");
         printf("\n3. inorder traversal\n4. postorder traversal\n5. Find the smallest element\n6. find the largest element");
         printf("\n7. delete an element\n8. count the total number of nodes\n9. count the total number of internal nodes\n11. determine the height of the tree\n12. find the mirror image of the tree");
         printf("\n13. delete the tree");
         printf("\n14. EXIT");
         printf("\n\n enter your option : ");
-        scnaf("%d", &option);
+        scanf("%d", &option);
         switch(option){
             case 1:
                 printf("\n enter the value of the new node: ");
@@ -55,7 +55,7 @@ int main(){
                 break;
             case 4:
                 printf("\n the elements of the tree are:\n");
-                ptr = postorderTraversal(tree);
+                postorderTraversal(tree);
                 break;
             case 5:
                 ptr = findSmallestElement(tree) ;
@@ -103,7 +103,7 @@ Node* insertElement(Node* tree, int val){
     ptr = (Node*)malloc(sizeof(Node));
     ptr -> data = val;
     ptr -> left = NULL;
-    ptr -> right = NULL:
+    ptr -> right = NULL;
     if(tree == NULL){
         tree = ptr;
         tree -> left = NULL;
@@ -132,7 +132,7 @@ void preorderTraversal(Node* tree){
 }
 
 void inorderTraversal(Node* tree){
-    if(tree!-NULL){
+    if(tree!=NULL){
         inorderTraversal(tree->left);
         printf("%d\t",tree->data);
         inorderTraversal(tree->right);
@@ -167,7 +167,7 @@ Node* deleteElement(Node* tree,int val){
     cur = tree->left;
     while(cur!=NULL && val!=cur->data){
         parent = cur;
-        cur = (val < cur->data)? cur->right;
+        cur = (val < cur->data)? cur->left: cur->right;
     }
     if(cur == NULL){
         printf("\n the value to be deleted is not present in the tree");
@@ -229,7 +229,7 @@ int height(Node* tree){
     int leftheight, rightheight;
     if(tree==NULL) return 0;
     else{
-        leftheight = Height(tree->left);
+        leftheight = height(tree->left);
         rightheight = height(tree->right);
         if(leftheight > rightheight)
             return (leftheight + 1);
