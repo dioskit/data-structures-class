@@ -78,7 +78,7 @@ bool isbst(Node* root){
     else if((root-> num < root -> right -> num) && (root -> num > root -> left -> num) ) 
         return (isbst(root->right) && isbst(root->left));
     else return false;
-    
+
 }
 
 int main(){
