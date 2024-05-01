@@ -75,10 +75,10 @@ bool isbst(Node* root){
     if(root == NULL){
         return true;
     }
-    else if(root->left < root-> right) return (isbst(root->right) && isbst(root->left));
-    else {
-        return false;
-    }
+    else if((root-> num < root -> right -> num) && (root -> num > root -> left -> num) ) 
+        return (isbst(root->right) && isbst(root->left));
+    else return false;
+    
 }
 
 int main(){
@@ -94,6 +94,6 @@ int main(){
 
     printf("\npostordered:\t");
     postorder(root);
-
+    printf("\n");
     isbst(root)?printf("yes\n"):printf("no\n");
 }
