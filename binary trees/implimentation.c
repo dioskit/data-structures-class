@@ -25,6 +25,7 @@ int totalExternal(Node*);
 int totalInternal(Node*);
 int height(Node*);
 Node* deleteTree(Node*);
+bool isbst(Node*);
 
 int main(void){
     int option, val;
@@ -257,3 +258,13 @@ Node* deleteTree(Node* tree){
     }
 }
 
+
+bool isbst(Node* root){
+    if(root == NULL){
+        return true;
+    }
+    else if(root->left < root-> right) return (isbst(root->right) && isbst(root->left));
+    else {
+        return false;
+    }
+}

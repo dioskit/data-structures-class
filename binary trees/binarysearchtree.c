@@ -8,7 +8,7 @@ typedef struct Node{
     struct Node* left;
 } Node;
 
-// createing an binary search
+// createing an binary TREE
 Node* createTree(int x){
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode -> num = x;
@@ -71,6 +71,16 @@ void postorder(Node* root){
     }
 }
 
+bool isbst(Node* root){
+    if(root == NULL){
+        return true;
+    }
+    else if(root->left < root-> right) return (isbst(root->right) && isbst(root->left));
+    else {
+        return false;
+    }
+}
+
 int main(){
     Node* root = NULL;
     int a[7] = {50,30,20,40,70,60,80};
@@ -85,4 +95,5 @@ int main(){
     printf("\npostordered:\t");
     postorder(root);
 
+    isbst(root)?printf("yes\n"):printf("no\n");
 }
