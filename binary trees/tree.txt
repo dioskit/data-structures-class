@@ -92,3 +92,44 @@ for(int i = 0; i < arryLenth; i++){
     rightChildIndex = tree[2i+2]
 }
 arrys are used to implement heahs*
+
+
+
+
+
+.
+.
+.
+// Online C compiler to run C program online
+#include <stdio.h>
+int vertices;
+void implement(int adj[][vertices]){
+    for(int i=0;i<vertices;i++){
+        for(int j=0;j<vertices;j++){
+            adj[i][j] = 0;
+        }
+    }
+}
+void print(int adj[][vertices]){
+    for(int i=0;i<vertices;i++){
+        for(int j=0;j<vertices;j++){
+            printf(" %d ",adj[i][j]);
+        }
+        printf("\n");
+    }
+}
+int main() {
+    printf("Number of vertices\n");
+    scanf("%d",&vertices);
+    int adj[vertices][vertices];
+    implement(adj);
+    int s,d;
+    printf("choose connections from (0,0) to (%d,%d)\n",vertices-1,vertices-1);
+    while(s!=-1 && d!=-1){
+        scanf("%d %d",&s,&d);
+        adj[s][d] = 1;
+        adj[d][s] =1;
+    }
+    print(adj);
+    return 0;
+}
