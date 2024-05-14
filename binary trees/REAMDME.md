@@ -44,3 +44,44 @@ Maximun number of nodes in a tree with height h,(length of the longest route fro
 **h = 2<sup>0</sup>+2<sup>61</sup>+. . .+2<sup>h</sup>**\
 **h = 2<sup>h+1</sup>-1**\
 **h = 2<sup>(_number of levels_)</sup>-1**
+
+
+# TREE TRAVERSAL
+- process of visiting each node in the tree exaclty once in some order.
+
+
+visit -> **reading/processing** data in a node
+
+## BREADTH FIRST
+*_Consider them as a special type of graph_*
+
+level order traversal 
+
+visit all the at nodes at same level before visiting nodes at next level
+- root node have level 0.
+- next node will have level 1 and so on.
+
+                           F root
+                    _______|_______       
+                    |              |
+                    D              J //print or visit these nodes first then move to next ones 
+                 ___|_____       __|____
+                |   |    |       |     |
+                B   E    G       K     H//next line to vist is level two
+                   _|_           |
+                  |   |          |
+                  A   C          I    //now these nodes will be printed
+                  
+**NOW THE OUTPUT WILL BE [ F, D, J, B, E, G, K,H, A, C, I ]**
+### TIME COMPLEXITY
+for all CASES its O(n);
+### SPACE COMPLEXITY
+- O(1) -best case such as linked list
+ - O(n) -for worst and average 
+
+
+## DEPTH FIRST
+### There are three types of depth first traversal
+- **ROOT** *LEFT* *RIGHT* -> Preorder
+- _LEFT_ **ROOT** _RIGHT_ -> Inorder
+- _LEFT_ _RIGHT_ __ROOT__ -> Postorder
