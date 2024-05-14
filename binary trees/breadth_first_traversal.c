@@ -1,24 +1,8 @@
-/*
-we can use queue for sotre address of the nodes
-its called discovered nodes
-
-if the node is root22
-*/
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
 
 #define MAXSIZE 100
-
-//QUEUE  FUNCTIONS
-node* queue[MAXSIZE];
-int front = -1;
-int rear = -1;
-void enqueue(node*);
-void dequeue();
-
-bool isempty();
-
 
 typedef struct node{
     int data;
@@ -26,6 +10,13 @@ typedef struct node{
     struct node* right;
 } node;
 
+//QUEUE  FUNCTIONS
+node* queue[MAXSIZE];
+int front = -1;
+int rear = -1;
+void enqueue(node*);
+void dequeue();
+bool isempty();
 //tree functions
 void inorder(node* root);
 void levelOrder(node* root);
@@ -35,7 +26,8 @@ int main(){
     node* root = NULL;
     for(int i = 10; i < 15; i++ ) root = insert(i,root);
     for(int j = 5; j < 10; j++) root = insert(j,root);
-    inorder(root);
+    // inorder(root);
+    levelOrder(root);
 }
 // lever order challanges
 void levelOrder(node* root){
@@ -45,7 +37,7 @@ void levelOrder(node* root){
         node* current = queue[front];
         printf("%d ",current->data);
         if(current->left != NULL) enqueue(current->left);
-        if(current->right != NULL) enqueue(cuurrent->right);
+        if(current->right != NULL) enqueue(current->right);
         dequeue(); //removing at front
     }
 }
@@ -79,7 +71,7 @@ void enqueue(node* root){
 void dequeue(){
     if(isempty()) return;
     else if(front == rear) front = rear = -1;
-    else front = (front-1)%MAXSIZE;
+    else front = (front+1)%MAXSIZE;
 }
 bool isempty(){
     if(front == -1 && rear == -1) return true;

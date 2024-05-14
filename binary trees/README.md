@@ -18,8 +18,8 @@ root, childern, parent sibling, leaf nodes
                     |              |
                     2              3            //2,3 are children nodes of 1
                  ___|_____       __|____
-                |   |    |       |     |
-                4   5    6       7     8         //4,5,6 are childern of 2, and 2 is their parent node and 7.8 are childern of 3 ans so on 
+                |         |       |     |
+                4         6       7     8         //4,5,6 are childern of 2, and 2 is their parent node and 7.8 are childern of 3 ans so on 
                    _|_           |
                   |   |          |
                   9   10         11              // 9,10,11,4,6,7,8 are called leaf nodes since they no other nodes linked to them
@@ -85,3 +85,11 @@ for all CASES its O(n);
 - **ROOT** *LEFT* *RIGHT* -> Preorder
 - _LEFT_ **ROOT** _RIGHT_ -> Inorder
 - _LEFT_ _RIGHT_ __ROOT__ -> Postorder
+
+### TIME COMPLEXITY
+   - for all CASES its O(n);
+### SPACE COMPLEXITY
+ - O(n) -for worst case
+ - O(log n) -for best and average 
+
+
