@@ -41,3 +41,32 @@ edges or vertices (except the first and last vertices).)
  (__*A complete graph has n(n–1)/2 edges, 
 where n is the number of nodes in G*__)
 - **``Size of a graph``** The size of a graph is the total number of edges in it.
+
+{
+    
+          vertex list:         
+        |   [ A ]    |
+        |   [ B ]    |
+        |   [ C ]    |
+        |   [ D ]    |
+        |   [ E ]    |
+        |   [ F ]    |
+        |   [ G ]    |
+        |   [ H ]    |
+
+          edge List
+    |   [ A ] - [ B ]  - [10]  |
+    |   [ A ] - [ C ]  - [10]  |
+    |   [ A ] - [ D ]  - [10]  |
+    |   [ B ] - [ E ]  - [10]  |
+    |   [ E ] - [ F ]  - [10]  |
+    |   [ C ] - [ G ]  - [10]  |
+    |   [ D ] - [ H ]  - [10]  |
+    |   [ E ] - [ H ]  - [10]  |
+    |   [ F ] - [ H ]  - [10]  |
+    |   [ G ] - [ H ]  - [10]  |
+}
+
+
+1. TIME-COST OF OPERATIOM
+2. MEMORY COST

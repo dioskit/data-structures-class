@@ -61,11 +61,11 @@ int MAX(int a, int b){
 }
         
 int treeHeight(node* root){
-    int leftHeight, rightHeight;
+    int leftHeight=0, rightHeight=0;
     if(root == NULL) return -1;
     leftHeight = treeHeight(root->left);
     rightHeight = treeHeight(root->right);
-    return MAX(leftheight,rightheight)+1;
+    return MAX(leftHeight,rightHeight)+1;
 }
 
 void describe(node* root){
@@ -85,7 +85,6 @@ void describe(node* root){
 
 int main(){
     node* root = NULL;
-    
     for(int j = 10; j < 15; j++) root = insert(j, root);
     for(int i = 0;  i < 5; i++) root = insert(i, root);
     describe(root);
